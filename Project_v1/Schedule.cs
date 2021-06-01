@@ -65,5 +65,12 @@ namespace Project_v1
             c1.WorkDays.Add(day);
             return c1;
         }
+
+        public static Schedule operator -(Schedule c1, string day)
+        {
+            if (c1.WorkDays.Contains(day))
+                c1.WorkDays.Remove(day);
+            return c1;
+        }
     }
 }

@@ -59,9 +59,18 @@ namespace Project_v1
 
         }
 
-        public void SetSchedule(Schedule schedule)
-        {
+        public void SetSchedule(Schedule schedule) => Schedule = schedule;
 
+        public void AddScheduleDays(string[] days)
+        {
+            for (int i = 0; i < days.Length; i++)
+                Schedule += days[i];
+        }
+
+        public void RemoveScheduleDays(string[] days)
+        {
+            for (int i = 0; i < days.Length; i++)
+                Schedule -= days[i];
         }
 
         public void AddPatient(User user, Patient patient)

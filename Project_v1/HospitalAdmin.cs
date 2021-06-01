@@ -23,7 +23,14 @@ namespace Project_v1
 
         public void AddHospitalAdmin(HospitalAdmin hospitalAdmin) => Hospital.AddHospitalAdmin(this, hospitalAdmin);
 
-        public void AddDoctor(Doctor doctor) => Hospital.AddDoctor(this, doctor);
+        public void AddDoctor(Doctor doctor, Schedule schedule = null)
+        {
+            if (Hospital.HasDoctor(doctor))
+                throw new Exception("Such doctor already exists");
+            if (schedule != null)
+                SetDoctorSchedule(doctor, schedule);
+            Hospital.AddDoctor(this, doctor);
+        }
 
         public void AddPatient(Patient patient, Doctor doctor)
         {
@@ -39,10 +46,7 @@ namespace Project_v1
             patient.AddAppointment(this, appointment);
         }
 
-        public void SetDoctorSchedule(Doctor doctor, Schedule schedule)
-        {
-
-        }
+        public void SetDoctorSchedule(Doctor doctor, Schedule schedule) => doctor.SetSchedule(schedule);
 
         public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}, Email {Email}";
     }
