@@ -35,15 +35,9 @@ namespace Project_v1
             patient.AddAppointment(this, appointment);
         }
 
-        public void DisplayPatientInfoById(string id)
-        {
-            patients.Find(pat => pat.Id.Equals(id)).DisplayInfo();
-        }
+        public void DisplayPatientInfoById(string id) => patients.Find(pat => pat.Id.Equals(id)).DisplayInfo();
 
-        public void GetPatientInfoByEmail(string email)
-        {
-            patients.Find(pat => pat.Email.Equals(email)).DisplayInfo();
-        }
+        public void GetPatientInfoByEmail(string email) => patients.Find(pat => pat.Email.Equals(email)).DisplayInfo();
 
         public void AddPrescription(Prescription prescription, string patientId)
         {
@@ -82,7 +76,19 @@ namespace Project_v1
 
         public bool HasPatient(Patient patient) => patients.Contains(patient);
 
-        public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}\nEmail {Email}\n" +
+        public override void DisplayInfo()
+        {
+            Console.WriteLine("~~~ Doctor Info ~~~");
+            base.DisplayInfo();
+            GetScheduleInfo();
+            GetPatientsInfo();
+        }
+
+        public void GetPatientsInfo() => Console.WriteLine("Patients: " + string.Join(", ", patients.Select(pa => pa.ToString())));
+
+        public void GetScheduleInfo() => Schedule.DisplayInfo();
+
+        public override string ToString() => $"Name: {FirstName} {LastName}\nEmail {Email}\n" +
             $"Position: {Position}\nExperience: {Experience} years\nDescription: {Description}";
     }
 }

@@ -26,6 +26,14 @@ namespace Project_v1
             Sex = sex;
         }
 
+        public override void DisplayInfo()
+        {
+            Console.WriteLine("~~~ Patient Info ~~~");
+            base.DisplayInfo();
+            GetAllergiesInfo();
+            GetLastAppointmentInfo();
+        }
+
         public override string ToString() => $"Name: {FirstName} {LastName}\nEmail: {Email}\nBlood type: {BloodType}, Sex: {Sex}";
 
         public Appointment GetLastAppointment() => appointments.Last();
@@ -42,14 +50,6 @@ namespace Project_v1
                 appointments.Add(appointment);
             else
                 throw new Exception("No rights");
-        }
-
-        public override void DisplayInfo()
-        {
-            Console.WriteLine("~~~ Patient Info ~~~");
-            base.DisplayInfo();
-            GetAllergiesInfo();
-            GetLastAppointmentInfo();
         }
     }
 }

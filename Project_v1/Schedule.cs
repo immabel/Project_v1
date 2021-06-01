@@ -55,6 +55,8 @@ namespace Project_v1
             WorkDays = newSchedule.WorkDays;
         }
 
+        public void DisplayInfo() => Console.WriteLine("Schedule Info:\n" + ToString());
+
         public override string ToString() => $"StartTime: {StartTime}, EndTime: {EndTime}" +
             $"WorkDays: {string.Join(", ", WorkDays)}";
 
