@@ -35,29 +35,28 @@ namespace Project_v1
             patient.AddAppointment(this, appointment);
         }
 
-        public Patient GetPatientInfoById(string id)
+        public void DisplayPatientInfoById(string id)
         {
-            return patients
-                .Where(pat => pat.Id.Equals(id))
-                .FirstOrDefault();
+            patients.Find(pat => pat.Id.Equals(id)).DisplayInfo();
         }
 
-        public Patient GetPatientInfoByEmail(string email)
+        public void GetPatientInfoByEmail(string email)
         {
-            return patients
-                .Where(pat => pat.Email.Equals(email))
-                .FirstOrDefault();
+            patients.Find(pat => pat.Email.Equals(email)).DisplayInfo();
         }
 
         public void AddPrescription(Prescription prescription, string patientId)
         {
-
+            Patient patient = patients.Find(p => p.Id.Equals(patientId));
+            if (patient != null)
+                patient.GetLastAppointment().AddPrescription(prescription);
+            else
+                throw new Exception("No such patient!");
         }
 
-        public void AddProductToPrescription(Product product, Patient patient)
-        {
+        public void AddProductToPrescription(Product product, Patient patient) => patient.GetLastAppointment().AddProduct(product);
 
-        }
+        public void RemoveProductFromPrescription(Product product, Patient patient) => patient.GetLastAppointment().RemoveProduct(product);
 
         public void SetSchedule(Schedule schedule) => Schedule = schedule;
 

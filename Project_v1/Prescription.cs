@@ -25,5 +25,20 @@ namespace Project_v1
         public string GetProductsInfo() => string.Join(", ", products.Select(prod => prod.ToString()));
         public void GetInfo() => Console.WriteLine(ToString());
         public override string ToString() => $"---Prescription Info---\nID: {id}\nProducts: {GetProductsInfo()}\nDescription: {Description}";
+
+        public static Prescription operator +(Prescription p, Product product)
+        {
+            if (p.products.Contains(product))
+                return p;
+            p.products.Add(product);
+            return p;
+        }
+
+        public static Prescription operator -(Prescription p, Product product)
+        {
+            if (p.products.Contains(product))
+                p.products.Remove(product);
+            return p;
+        }
     }
 }

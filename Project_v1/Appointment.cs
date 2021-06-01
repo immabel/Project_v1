@@ -20,7 +20,13 @@ namespace Project_v1
         }
 
         public void DisplayInfo() => Console.WriteLine(ToString());
+
         public override string ToString() => $"---Appointment Info---\nDate: {DateTimeAppointment}\n{Prescription.ToString()}\nDescription: {Description}";
+
         public void AddPrescription(Prescription prescription) => Prescription = prescription;
+
+        public void AddProduct(Product product) => Prescription += product;
+
+        public void RemoveProduct(Product product) => Prescription -= product;
     }
 }

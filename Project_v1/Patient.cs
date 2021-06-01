@@ -26,11 +26,13 @@ namespace Project_v1
             Sex = sex;
         }
 
-        public override string ToString() => $"Name: {FirstName} {LastName}, Blood type: {BloodType}, Sex: {Sex}";
+        public override string ToString() => $"Name: {FirstName} {LastName}\nEmail: {Email}\nBlood type: {BloodType}, Sex: {Sex}";
 
         public Appointment GetLastAppointment() => appointments.Last();
 
         public void GetLastAppointmentInfo() => appointments.Last().DisplayInfo();
+
+        public void GetAllergiesInfo() => Console.WriteLine("Allergies: " + string.Join(", ", allergies.Select(al => al.ToString())));
 
         public string GetProducts() => appointments.Last().Prescription.GetProductsInfo();
 
@@ -40,6 +42,14 @@ namespace Project_v1
                 appointments.Add(appointment);
             else
                 throw new Exception("No rights");
+        }
+
+        public override void DisplayInfo()
+        {
+            Console.WriteLine("~~~ Patient Info ~~~");
+            base.DisplayInfo();
+            GetAllergiesInfo();
+            GetLastAppointmentInfo();
         }
     }
 }
