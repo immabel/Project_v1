@@ -8,8 +8,8 @@ namespace Project_v1
 {
     public class Patient : User
     {
-        protected List<Appointment> appointments;
-        protected List<Allergy> allergies;
+        protected List<Appointment> appointments = new List<Appointment>();
+        protected List<Allergy> allergies = new List<Allergy>();
         protected string BloodType { get; private set; }
         protected string Sex { get; private set; }
 

@@ -9,7 +9,7 @@ namespace Project_v1
     public class Prescription
     {
         public readonly int id;
-        private List<Product> products;
+        private List<Product> products = new List<Product>();
         public string Description { get; protected set; }
 
         public Prescription(

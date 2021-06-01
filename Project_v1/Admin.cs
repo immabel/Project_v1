@@ -8,8 +8,8 @@ namespace Project_v1
 {
     public class Admin : User
     {
-        private static List<RequestToCreate> requestsToCreate;
-        private static List<Hospital> hospitals;
+        private static List<RequestToCreate> requestsToCreate = new List<RequestToCreate>();
+        private static List<Hospital> hospitals = new List<Hospital>();
         public Admin(
             string id,
             string fName,
@@ -17,26 +17,28 @@ namespace Project_v1
             string email,
             string password = null,
             string roleName = Rolename.ADMIN) : base(id, fName, lName, roleName, email, password)
-        {
-            requestsToCreate = new List<RequestToCreate>();
-        }
+        {     }
+
+        public void AddRequest(RequestToCreate request) => requestsToCreate.Add(request);
 
         public void ApproveRequest(int requestId)
         {
             RequestToCreate request = requestsToCreate.Find(req => req.id == requestId);
             if (request != null)
             {
-                Hospital hospital = new Hospital(request.HospitalName, request.Address, request.Country);
+                Hospital hospital = new Hospital(hospitals.Count + 1, request.HospitalName, request.Address, request.Country);
                 HospitalAdmin hospitalAdmin = new HospitalAdmin(
-                    "1",
+                    "ha" + hospital.id,
                     request.SubmitterFirstName,
                     request.SubmitterLastName,
                     request.Email,
                     hospital);
                 hospital.AddHospitalAdmin(this, hospitalAdmin);
                 hospitals.Add(hospital);
+                requestsToCreate.RemoveAll(req => req.id == requestId);
             }
-            throw new Exception("Request with such Id does not exist!");
+            else
+                throw new Exception("Request with such Id does not exist!");
         }
 
         public void RejectRequest(int requestId) => requestsToCreate.RemoveAll(req => req.id == requestId);

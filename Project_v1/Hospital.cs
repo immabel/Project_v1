@@ -9,17 +9,19 @@ namespace Project_v1
     public class Hospital
     {
         public readonly int id;
-        private List<Doctor> doctors;
-        private List<HospitalAdmin> hospitalAdmins;
+        private List<Doctor> doctors = new List<Doctor>();
+        private List<HospitalAdmin> hospitalAdmins = new List<HospitalAdmin>();
         public string Name { get; protected set; }
         public string Address { get; protected set; }
         public string Country { get; protected set; }
 
         public Hospital(
+            int id,
             string name,
             string address,
             string country)
         {
+            this.id = id;
             Name = name;
             Address = address;
             Country = country;
