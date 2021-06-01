@@ -30,7 +30,9 @@ namespace Project_v1
 
         public void AddAppointment(Appointment appointment, Patient patient)
         {
-
+            if (!HasPatient(patient))
+                AddPatient(this, patient);
+            patient.AddAppointment(this, appointment);
         }
 
         public Patient GetPatientInfoById(string id)

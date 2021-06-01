@@ -39,6 +39,11 @@ namespace Project_v1
             patient.AddAppointment(this, appointment);
         }
 
+        public void SetDoctorSchedule(Doctor doctor, Schedule schedule)
+        {
+
+        }
+
         public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}, Email {Email}";
     }
 }
