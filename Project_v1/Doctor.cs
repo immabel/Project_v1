@@ -47,7 +47,7 @@ namespace Project_v1
                 .FirstOrDefault();
         }
 
-        public void AddPrescription(Prescription prescription, Patient patient)
+        public void AddPrescription(Prescription prescription, string patientId)
         {
 
         }
@@ -62,6 +62,17 @@ namespace Project_v1
 
         }
 
-        public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}, Email {Email}";
+        public void AddPatient(User user, Patient patient)
+        {
+            if (user.IsDoctorOrHigher())
+                patients.Add(patient);
+            else
+                throw new Exception("No rights");
+        }
+
+        public bool HasPatient(Patient patient) => patients.Contains(patient);
+
+        public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}\nEmail {Email}\n" +
+            $"Position: {Position}\nExperience: {Experience} years\nDescription: {Description}";
     }
 }

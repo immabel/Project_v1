@@ -41,26 +41,14 @@ namespace Project_v1
 
         public void RejectRequest(int requestId) => requestsToCreate.RemoveAll(req => req.id == requestId);
 
-        public List<RequestToCreate> GetAllRequests()
-        {
-            if(IsAdminOrHigher())
-                return requestsToCreate;
-            throw new Exception("No rights");
-        }
+        public void GetAllRequestsInfo() => requestsToCreate.ForEach(req => req.DisplayInfo());
 
         public void AddHospitalAdmin(HospitalAdmin hospitalAdmin, Hospital hospital)
         {
-
-        }
-
-        public virtual void AddDoctor(Doctor doctor)
-        {
-
-        }
-
-        public virtual void AddPatient(Patient patient, Doctor doctor)
-        {
-
+            if (hospitals.Contains(hospital))
+                hospital.AddHospitalAdmin(this, hospitalAdmin);
+            else
+                throw new Exception("Such hospital does not exist");
         }
 
         public override string ToString() => $"Rolename: {roleName}, Name: {FirstName}";

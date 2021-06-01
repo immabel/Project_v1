@@ -26,9 +26,20 @@ namespace Project_v1
             Sex = sex;
         }
 
-        public void GetInfo() => Console.WriteLine(ToString());
         public override string ToString() => $"Name: {FirstName} {LastName}, Blood type: {BloodType}, Sex: {Sex}";
-        public void GetLastAppointmentInfo() => appointments.Last().GetInfo();
+
+        public Appointment GetLastAppointment() => appointments.Last();
+
+        public void GetLastAppointmentInfo() => appointments.Last().DisplayInfo();
+
         public string GetProducts() => appointments.Last().Prescription.GetProductsInfo();
+
+        public void AddAppointment(User user, Appointment appointment)
+        {
+            if (user.IsDoctorOrHigher())
+                appointments.Add(appointment);
+            else
+                throw new Exception("No rights");
+        }
     }
 }

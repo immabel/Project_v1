@@ -13,13 +13,14 @@ namespace Project_v1
         public string DateTimeAppointment { get; protected set; }
         public string Description { get; protected set; }
 
-        public Appointment(string date, string description = "")
+        public Appointment(string date, string description = null)
         {
             DateTimeAppointment = date;
             Description = description;
         }
 
-        public void GetInfo() => Console.WriteLine(ToString());
+        public void DisplayInfo() => Console.WriteLine(ToString());
         public override string ToString() => $"---Appointment Info---\nDate: {DateTimeAppointment}\n{Prescription.ToString()}\nDescription: {Description}";
+        public void AddPrescription(Prescription prescription) => Prescription = prescription;
     }
 }

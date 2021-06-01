@@ -21,24 +21,22 @@ namespace Project_v1
             Hospital = hospital;
         }
 
-        public void AddHospitalAdmin(HospitalAdmin hospitalAdmin)
-        {
+        public void AddHospitalAdmin(HospitalAdmin hospitalAdmin) => Hospital.AddHospitalAdmin(this, hospitalAdmin);
 
+        public void AddDoctor(Doctor doctor) => Hospital.AddDoctor(this, doctor);
+
+        public void AddPatient(Patient patient, Doctor doctor)
+        {
+            if (!Hospital.HasDoctor(doctor))
+                throw new Exception($"No such doctor in the hospital \"{Hospital.Name}\"");
+            doctor.AddPatient(this, patient);
         }
 
-        public override void AddDoctor(Doctor doctor)
+        public void AddAppointment(Doctor doctor, Patient patient, Appointment appointment)
         {
-            
-        }
-
-        public override void AddPatient(Patient patient, Doctor doctor)
-        {
-
-        }
-
-        public void AddAppointment(Doctor doctor, Patient patient)
-        {
-
+            if (!Hospital.HasPatient(patient))
+                AddPatient(patient, doctor);
+            patient.AddAppointment(this, appointment);
         }
 
         public override string ToString() => $"Rolename: {roleName}, Name: {FirstName} {LastName}, Email {Email}";

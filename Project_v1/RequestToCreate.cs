@@ -36,6 +36,8 @@ namespace Project_v1
             DateOfCreation = DateTimeOffset.UtcNow;
         }
 
+        public void DisplayInfo() => Console.WriteLine(ToString());
+
         public override string ToString() => $"ID: {id}\n" +
             $"HospitalName: {HospitalName}\n" +
             $"Address: {Address}\n" +

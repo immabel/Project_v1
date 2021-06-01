@@ -29,7 +29,22 @@ namespace Project_v1
         {
             if (user.IsHospitalAdminOrHigher())
                 hospitalAdmins.Add(hospitalAdmin);
-            throw new Exception("No rights!");
+            else
+                throw new Exception("No rights!");
         }
+
+        public void AddDoctor(User user, Doctor doctor)
+        {
+            if (user.IsHospitalAdminOrHigher())
+                doctors.Add(doctor);
+            else
+                throw new Exception("No rights!");
+        }
+
+        public bool HasHospitalAdmin(HospitalAdmin hospitalAdmin) => hospitalAdmins.Contains(hospitalAdmin);
+
+        public bool HasDoctor(Doctor doctor) => doctors.Contains(doctor);
+
+        public bool HasPatient(Patient patient) => doctors.Any(doc => doc.HasPatient(patient));
     }
 }
