@@ -33,7 +33,7 @@ namespace Project_v1
             SubmitterFirstName = submitterFirstName;
             SubmitterLastName = submitterLastName;
             Email = email;
-            DateOfCreation = DateTimeOffset.UtcNow;
+            DateOfCreation = DateTimeOffset.Now;
         }
 
         public void DisplayInfo() => Console.WriteLine(ToString());
